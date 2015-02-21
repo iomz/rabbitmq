@@ -18,6 +18,7 @@ RUN \
   DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server && \
   rm -rf /var/lib/apt/lists/* && \
   rabbitmq-plugins enable rabbitmq_management && \
+  rabbitmq-plugins enable rabbitmq_mqtt && \
   echo "[{rabbit, [{loopback_users, []}]}]." > /etc/rabbitmq/rabbitmq.config && \
   chmod +x /usr/local/bin/rabbitmq-start
 
@@ -35,5 +36,6 @@ WORKDIR /data
 CMD ["rabbitmq-start"]
 
 # Expose ports.
+EXPOSE 1883
 EXPOSE 5672
 EXPOSE 15672
